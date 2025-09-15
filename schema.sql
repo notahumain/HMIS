@@ -45,5 +45,5 @@ CREATE TABLE IF NOT EXISTS bill_items (
   qty INT DEFAULT 1,
   FOREIGN KEY (bill_id) REFERENCES bills(id) ON DELETE CASCADE
 );
-CREATE INDEX IF NOT EXISTS idx_patients_name ON patients(name);
-CREATE INDEX IF NOT EXISTS idx_appointments_sched ON appointments(scheduled_at);
+CREATE INDEX idx_patients_name ON patients(name);
+CREATE INDEX idx_appointments_sched ON appointments(scheduled_at);
