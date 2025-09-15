@@ -23,3 +23,7 @@ A small hospital management web app built for a student capstone. It keeps thing
    ```bash
    git clone https://github.com/<your-username>/HMIS.git
    cd HMIS
+
+Note: Tested on MySQL 8.0. MySQL does not support `IF NOT EXISTS` in `CREATE INDEX`,
+so the schema uses plain `CREATE INDEX`.
+
