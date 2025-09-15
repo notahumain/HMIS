@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Appointments</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="top">
+  <div>HMIS</div>
+  <nav>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/patients.html">Patients</a>
+    <a href="/billing.html">Billing</a>
+    <button id="logout">Logout</button>
+  </nav>
+</header>
+<main class="container">
+  <h2>Appointments</h2>
+  <form id="addAppt" class="row">
+    <input name="patient_id" type="number" placeholder="Patient ID" required>
+    <input name="doctor_id" type="number" placeholder="Doctor ID" required>
+    <input name="scheduled_at" type="datetime-local" required>
+    <input name="notes" placeholder="Notes">
+    <button>Schedule</button>
+  </form>
+  <table id="atab"><thead><tr><th>ID</th><th>Patient</th><th>Doctor</th><th>When</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
+</main>
+<script src="/app.js"></script>
+<script>
+requireAuth();listAppointments();bindApptForm()
+</script>
+</body>
+</html>

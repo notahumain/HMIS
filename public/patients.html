@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Patients</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="top">
+  <div>HMIS</div>
+  <nav>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/appointments.html">Appointments</a>
+    <a href="/billing.html">Billing</a>
+    <button id="logout">Logout</button>
+  </nav>
+</header>
+<main class="container">
+  <h2>Patients</h2>
+  <form id="addPatient" class="row">
+    <input name="patient_uid" placeholder="UID" required>
+    <input name="name" placeholder="Name" required>
+    <input name="dob" type="date">
+    <select name="gender"><option value="M">M</option><option value="F">F</option><option value="O">O</option></select>
+    <input name="phone" placeholder="Phone">
+    <input name="address" placeholder="Address">
+    <button>Add</button>
+  </form>
+  <input id="q" placeholder="Search">
+  <table id="ptab"><thead><tr><th>UID</th><th>Name</th><th>DOB</th><th>Gender</th><th>Phone</th><th>Address</th><th></th></tr></thead><tbody></tbody></table>
+</main>
+<script src="/app.js"></script>
+<script>
+requireAuth();listPatients();bindPatientForm()
+</script>
+</body>
+</html>

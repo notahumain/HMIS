@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Billing</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="top">
+  <div>HMIS</div>
+  <nav>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/patients.html">Patients</a>
+    <a href="/appointments.html">Appointments</a>
+    <button id="logout">Logout</button>
+  </nav>
+</header>
+<main class="container">
+  <h2>Billing</h2>
+  <form id="makeBill" class="row">
+    <input name="patient_id" type="number" placeholder="Patient ID" required>
+    <textarea name="items" placeholder='[{"item":"Consultation","price":500,"qty":1}]' required></textarea>
+    <button>Create Bill</button>
+  </form>
+  <table id="btab"><thead><tr><th>ID</th><th>Patient</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
+</main>
+<script src="/app.js"></script>
+<script>
+requireAuth();listBills();bindBillForm()
+</script>
+</body>
+</html>
