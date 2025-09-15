@@ -46,4 +46,8 @@ CREATE TABLE IF NOT EXISTS bill_items (
   FOREIGN KEY (bill_id) REFERENCES bills(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_patients_name ON patients(name);
+<<<<<<< HEAD
 CREATE INDEX idx_appointments_sched ON appointments(scheduled_at);
+=======
+CREATE INDEX idx_appointments_sched ON appointments(scheduled_at);
+>>>>>>> fc2ce97bed6cca1f4b8c001715ad49e99d543cdf
