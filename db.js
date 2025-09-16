@@ -1,6 +1,7 @@
 import mysql from 'mysql2/promise'
 import cfg from './config.js'
-export const pool = mysql.createPool({
+
+const pool = mysql.createPool({
   host: cfg.db.host,
   port: cfg.db.port,
   user: cfg.db.user,
@@ -10,3 +11,5 @@ export const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0
 })
+
+export default pool

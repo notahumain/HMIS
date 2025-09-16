@@ -3,33 +3,87 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Appointments</title>
-<link rel="stylesheet" href="/styles.css">
+<title>HMIS — Appointments</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center}
+  .modal.show{display:flex}
+  .modal-card{width:100%;max-width:520px;background:#0c1323;border:1px solid #1f2a44;border-radius:14px;padding:16px}
+  .row{display:flex;gap:10px}
+  .row>*{flex:1}
+  label{display:block;font-size:12px;color:#94a3b8;margin:8px 0 4px}
+  input,textarea,select{width:100%;background:#0b1220;border:1px solid #1f2a44;color:#e5e7eb;padding:10px 12px;border-radius:10px;outline:none}
+</style>
 </head>
-<body>
-<header class="top">
-  <div>HMIS</div>
-  <nav>
-    <a href="/dashboard.html">Dashboard</a>
-    <a href="/patients.html">Patients</a>
-    <a href="/billing.html">Billing</a>
-    <button id="logout">Logout</button>
-  </nav>
-</header>
-<main class="container">
-  <h2>Appointments</h2>
-  <form id="addAppt" class="row">
-    <input name="patient_id" type="number" placeholder="Patient ID" required>
-    <input name="doctor_id" type="number" placeholder="Doctor ID" required>
-    <input name="scheduled_at" type="datetime-local" required>
-    <input name="notes" placeholder="Notes">
-    <button>Schedule</button>
-  </form>
-  <table id="atab"><thead><tr><th>ID</th><th>Patient</th><th>Doctor</th><th>When</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
-</main>
-<script src="/app.js"></script>
-<script>
-requireAuth();listAppointments();bindApptForm()
-</script>
+<body data-page="appointments">
+  <div class="container">
+    <header>
+      <div class="brand">HMIS</div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="patients.html">Patients</a>
+        <a href="appointments.html">Appointments</a>
+        <a href="billing.html">Billing</a>
+        <a href="#" id="logout">Logout</a>
+      </nav>
+    </header>
+
+    <div class="panel">
+      <div class="toolbar">
+        <input id="q" type="text" placeholder="Search by patient or doctor">
+        <div style="flex:1"></div>
+        <button id="addApptBtn">+ New appointment</button>
+        <button class="secondary" id="refreshBtn">Refresh</button>
+      </div>
+
+      <table id="tbl">
+        <thead>
+          <tr><th>Patient</th><th>Doctor</th><th>When</th><th>Status</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden">Saved</div>
+
+  <div class="modal" id="apptModal">
+    <div class="modal-card">
+      <h3 style="margin:0 0 8px">Create Appointment</h3>
+      <div class="row">
+        <div>
+          <label for="a_patient_id">Patient ID</label>
+          <input id="a_patient_id" placeholder="e.g. 1">
+        </div>
+        <div>
+          <label for="a_doctor">Doctor</label>
+          <input id="a_doctor" placeholder="e.g. Dr. Meera">
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label for="a_when">When (YYYY-MM-DD HH:MM)</label>
+          <input id="a_when" placeholder="2025-09-16 14:30">
+        </div>
+        <div>
+          <label for="a_status">Status</label>
+          <select id="a_status">
+            <option value="scheduled">scheduled</option>
+            <option value="completed">completed</option>
+            <option value="cancelled">cancelled</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+        <button class="secondary" id="cancelAppt">Cancel</button>
+        <button id="saveAppt">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+  <script>
+    guardAuth(); bootPage();
+  </script>
 </body>
 </html>

@@ -4,21 +4,42 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HMIS Login</title>
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <div class="wrap">
   <h1>HMIS</h1>
   <form id="loginForm">
-    <input id="email" placeholder="Email" required>
-    <input id="password" type="password" placeholder="Password" required>
+    <input id="email" placeholder="Email" required />
+    <input id="password" type="password" placeholder="Password" required />
     <button type="submit">Login</button>
   </form>
-  <p class="hint">Default admin: admin@hmis.local / admin123 (set after seeding)</p>
+  <p class="hint">Default admin: admin@hmis.local / admin123</p>
 </div>
-<script src="/app.js"></script>
+
 <script>
-initLogin()
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email, password })
+    });
+    let data = {};
+    try { data = await res.json(); } catch {}
+    if (res.ok && data && data.token) {
+      localStorage.setItem('token', data.token);
+      location.href = 'dashboard.html';
+    } else {
+      alert(data.message || 'Invalid credentials');
+    }
+  } catch (err) {
+    alert('Network error');
+  }
+});
 </script>
 </body>
 </html>

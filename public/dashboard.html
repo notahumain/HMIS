@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HMIS — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="dashboard">
+  <div class="container">
+    <header>
+      <div class="brand">HMIS</div>
+      <nav>
+        <a href="patients.html">Patients</a>
+        <a href="appointments.html">Appointments</a>
+        <a href="billing.html">Billing</a>
+        <a href="#" id="logout">Logout</a>
+      </nav>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div class="metric">Total Patients</div>
+        <div class="value" id="mPatients">—</div>
+        <div class="badge">↗ Today <span id="mPatientsDelta">+0</span></div>
+      </div>
+      <div class="card">
+        <div class="metric">Appointments (Next 24h)</div>
+        <div class="value" id="mAppts">—</div>
+        <div class="badge" style="background:#0a1f37;border-color:#1e3a8a;color:#93c5fd">
+          Upcoming
+        </div>
+      </div>
+      <div class="card">
+        <div class="metric">Unpaid Bills</div>
+        <div class="value" id="mUnpaid">—</div>
+        <div class="badge" style="background:#2a1010;border-color:#7f1d1d;color:#fecaca">
+          Attention
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="toolbar">
+        <input id="q" type="text" placeholder="Search patient or phone…" />
+        <button id="addBtn">+ Add patient</button>
+        <button class="secondary" id="refreshBtn">Refresh</button>
+      </div>
+      <table id="tbl">
+        <thead>
+          <tr><th>Name</th><th>Phone</th><th>Age</th><th>Last Visit</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden">Saved</div>
+
+  <script src="app.js"></script>
+  <script>
+    // redirect to login if no token
+    const t = localStorage.getItem('token');
+    if (!t) location.href = 'index.html';
+  </script>
+</body>
+</html>
